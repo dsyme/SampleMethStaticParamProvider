@@ -3,6 +3,8 @@
 This is a Hackathon project to add the F# language feature described here: http://fslang.uservoice.com/forums/245727-f-language/suggestions/6097685-allow-static-arguments-to-type-provider-methods-e.
 
 
+The core feature is implemented to prototype quality. You can see the feature here: https://visualfsharp.codeplex.com/SourceControl/network/forks/dsyme/cleanup/contribution/7203 
+
 
 ### Feature Design
 
