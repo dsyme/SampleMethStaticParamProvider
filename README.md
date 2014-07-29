@@ -21,7 +21,7 @@ Note: no Visual Tools are built as yet, so the new feature is only accessible to
 
     git clone https://github.com/dsyme/SampleMethStaticParamProvider
 
-This type provider that uses this.  This is in a separate repo and you will need to update the path to the F# compiler [here](https://github.com/dsyme/SampleMethStaticParamProvider/blob/master/tests/SampleMethStaticParamProvider.Tests/SampleMethStaticParamProvider.Tests.fsproj#L14)
+This type provider that uses this.  This is in a separate repo and *you will need to update the path to the F# compiler [here](https://github.com/dsyme/SampleMethStaticParamProvider/blob/master/tests/SampleMethStaticParamProvider.Tests/SampleMethStaticParamProvider.Tests.fsproj#L14)*
 
 The sample provider lets you do this:
 
