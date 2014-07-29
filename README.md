@@ -1,4 +1,4 @@
-# Sample of a type provider where methods have static parameters
+# Sample of a type provider where methods have static parameters (demo of an F# 4.0+ feature)
 
 This is a Hackathon project to add the F# language feature described here: http://fslang.uservoice.com/forums/245727-f-language/suggestions/6097685-allow-static-arguments-to-type-provider-methods-e.
 
