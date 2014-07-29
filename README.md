@@ -1,5 +1,51 @@
 # Sample of a type provider with static parameters
 
+This is a Hackathon project to add the F# language feature described here: http://fslang.uservoice.com/forums/245727-f-language/suggestions/6097685-allow-static-arguments-to-type-provider-methods-e.
+
+
+
+### Feature Design
+
+From the point of view of the programmer, the feature lets them use type provider where methods can take static parameters:
+
+    let x = ExampleType()
+
+    let v1 = x.ExampleMethWithStaticParam<1>(1) 
+    let v2 = x.ExampleMethWithStaticParam<2>(1,2) 
+    let v3 = x.ExampleMethWithStaticParam<3>(1,2,3) 
+
+Note that the sample method changes its number of static parameters with the static parameter given to the method. The return type can likewise be changed (and can be a provided type whose name depends on the input parameter)
+
+
+From the point of view of the type provider author, using the modified ProvideTypes API, provided methods can now include a DefineStaticParameters specification:
+
+    let staticParams = [ProvidedStaticParameter("Count", typeof<int>)]
+    let exampleMethWithStaticParams =  
+      let m = ProvidedMethod("ExampleMethWithStaticParam", [ ], typeof<int>, IsStaticMethod = false)
+      m.DefineStaticParameters(staticParams, (fun nm args ->
+          let arg = args.[0] :?> int
+          let parms = [ for i in 1 .. arg -> ProvidedParameter("arg" + string i, typeof<int>)]
+          let m2 = 
+              ProvidedMethod(nm, parms, typeof<int>, IsStaticMethod = false,
+                             InvokeCode = fun args -> <@@ arg @@>)
+          newType.AddMember m2
+          m2))
+      m
+
+
+The design is very much like that for ``DefineStaticParameters`` on types.
+
+Notes:
+
+- Here `nm` is the name to use for the actual instantiated method. It is a mangled name
+- - The arguments and the return type on are irrelevant.  
+- The staticness of  ``exampleMethWithStaticParams`` is relevant and must match the staticness of the instantiated method ``m2``. This is not checked.
+- The method ``m2`` must be added to the same type as ``exampleMethWithStaticParams``
+
+
+Underneath the type provider API is extended artificially through a pattern where we use reflection to interrogate the type provider object for an additional pair of methods, see here: https://visualfsharp.codeplex.com/SourceControl/network/forks/dsyme/cleanup/contribution/7203#!/tab/changes.
+
+
 ### Get the repo
 
     git clone -b staticparams https://git01.codeplex.com/forks/dsyme/cleanup staticparams
@@ -17,11 +63,13 @@
 Note: no Visual Tools are built as yet, so the new feature is only accessible to command-line tools. You should be able to follow the instructions on http://visualfsharp.codeplex.com to build, install and use the tools, though setting FscToolPath may still be needed, see below.
 
 
-#### Now get and build the sample provider 
+
+#### Now get and build the sample provider (this repo)
 
     git clone https://github.com/dsyme/SampleMethStaticParamProvider
 
-This type provider that uses this.  This is in a separate repo and *you will need to update the path to the F# compiler [here](https://github.com/dsyme/SampleMethStaticParamProvider/blob/master/tests/SampleMethStaticParamProvider.Tests/SampleMethStaticParamProvider.Tests.fsproj#L14)*
+
+This type provider that uses the new feature.  This is in a separate repo and *you will need to update the path to the F# compiler [here](https://github.com/dsyme/SampleMethStaticParamProvider/blob/master/tests/SampleMethStaticParamProvider.Tests/SampleMethStaticParamProvider.Tests.fsproj#L14)*
 
 The sample provider lets you do this:
 
