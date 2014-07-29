@@ -32,6 +32,7 @@ let tags = ""
 
 // File system information 
 let solutionFile  = "SampleMethStaticParamProvider.sln"
+let testsSolutionFile  = "SampleMethStaticParamProvider.Tests.sln"
 
 // Pattern specifying assemblies to be tested using NUnit
 let testAssemblies = "tests/**/bin/Release/*Tests*.dll"
@@ -65,16 +66,19 @@ Target "Clean" (fun _ ->
     CleanDirs ["bin"; "temp"]
 )
 
-Target "CleanDocs" (fun _ ->
-    CleanDirs ["docs/output"]
-)
-
 // --------------------------------------------------------------------------------------
 // Build library & test project
 
 Target "Build" (fun _ ->
     !! solutionFile
-    |> MSBuildRelease "" "Rebuild"
+    |> MSBuildRelease "" "Build"
+    |> ignore
+)
+
+
+Target "BuildTests" (fun _ ->
+    !! testsSolutionFile
+    |> MSBuildRelease "" "Build"
     |> ignore
 )
 
@@ -97,10 +101,10 @@ Target "RunTests" (fun _ ->
 
 Target "All" DoNothing
 
-"Clean"
-  ==> "RestorePackages"
+"RestorePackages"
   ==> "AssemblyInfo"
   ==> "Build"
+  ==> "BuildTests"
   ==> "RunTests"
   ==> "All"
 
