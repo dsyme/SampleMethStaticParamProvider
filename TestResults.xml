@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\GitHub\dsyme\SampleMethStaticParamProvider\tests\SampleMethStaticParamProvider.Tests\bin\Release\SampleMethStaticParamProvider.Tests.dll" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2014-07-29" time="17:32:04">
+  <environment nunit-version="2.6.3.13283" clr-version="2.0.50727.5477" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\GitHub\dsyme\SampleMethStaticParamProvider" machine-name="MSRC-3765408" user="dsyme" user-domain="EUROPE" />
+  <culture-info current-culture="en-GB" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="C:\GitHub\dsyme\SampleMethStaticParamProvider\tests\SampleMethStaticParamProvider.Tests\bin\Release\SampleMethStaticParamProvider.Tests.dll" executed="True" result="Success" success="True" time="0.148" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="SampleMethStaticParamProvider" executed="True" result="Success" success="True" time="0.129" asserts="0">
+        <results>
+          <test-suite type="TestFixture" name="Tests" executed="True" result="Success" success="True" time="0.127" asserts="0">
+            <results>
+              <test-case name="SampleMethStaticParamProvider.Tests.hello returns 42" executed="True" result="Success" success="True" time="0.116" asserts="1" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
