@@ -103,13 +103,15 @@ A modified SqlClient type provider that takes the SQL command? - see [the origin
     let sqlTable = ctxt.CreateTable<"CREATE TABLE Foo COLUMNS X, Y">()  
 
 
-4. A search functionality in the DbPedia provider which reveals individual entities:
+#### A search functionality in the Freebase or DbPedia provider which reveals individual entities:
 
-      type DbPedia = DbPediaProvider<"Some Parameters">
+    type DbPedia = DbPediaProvider<"Some Parameters">
 
-      let ctxt = DbPedia.GetDataContext()
+    let ctxt = DbPedia.GetDataContext()
     
-      let princeTheMusician = ctxt.Ontology.People.Search<"Prince">. // At this point the completions for all people matching "Prince" would be shown
+    let princeTheMusician = ctxt.Ontology.People.Search<"Prince">. 
+
+In the intellisense at the last point  the completions for all people matching "Prince" would be shown
 
 ## Can this be done today?
 
@@ -123,10 +125,6 @@ Sort of. Things generally get very nasty when you have a primary set of static p
                     nested type Search_B2_Results // use the mangled name provided for the method to create these types
 
 Previously when you could only parameterize types doing this sort of thing was much more painful.
-
-
-
-
 
 
 
@@ -145,7 +143,6 @@ Previously when you could only parameterize types doing this sort of thing was m
     msbuild fsharp-compiler-build.proj /p:TargetFramework=net40
 
 Note: no Visual Tools are built as yet, so the new feature is only accessible to command-line tools. You should be able to follow the instructions on http://visualfsharp.codeplex.com to build, install and use the tools, though setting FscToolPath may still be needed, see below.
-
 
 
 #### Now get and build the sample provider (this repo)
