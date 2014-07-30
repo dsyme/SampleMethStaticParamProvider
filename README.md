@@ -55,25 +55,25 @@ We don't use additions to the ITypeProvider interface in the protoype to avoid b
 
 1. A modified CSV type provider that lets you do add a column. The return type would be a _new_ object representing the data collection with the column added.  This is a bit like a "reccord calculus" where you can add and remove columns in user code in strongly typed ways (but can't write code that is generic over column types)
 
-      // assume csvData has some type 
-      type MyCsvFile = FSharp.Data.CsvProvider<"mycsv.csv">
+       // assume csvData has some type 
+       type MyCsvFile = FSharp.Data.CsvProvider<"mycsv.csv">
     
-      let csvData = MyCsvFile.LoadSample() // ....
+       let csvData = MyCsvFile.LoadSample() // ....
 
-      [ for row in csvData -> row.Column1, row.Column2 ]
+       [ for row in csvData -> row.Column1, row.Column2 ]
 
     
-      let newCsvData = csvData.WithColumn<"Column3", "int">()  
+       let newCsvData = csvData.WithColumn<"Column3", "int">()  
     
-      [ for row in newCsvData -> row.Column1, row.Column2, row.Column3 ]
+       [ for row in newCsvData -> row.Column1, row.Column2, row.Column3 ]
 
-      let newCsvData2 = newCsvData.WithColumn<"Column4", "int">()  
+       let newCsvData2 = newCsvData.WithColumn<"Column4", "int">()  
 
-      [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column3, row.Column4 ]
+       [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column3, row.Column4 ]
 
-      let newCsvData3 = newCsvData.RemoveColumn<"Column3", "int">()  
+       let newCsvData3 = newCsvData.RemoveColumn<"Column3", "int">()  
 
-      [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column4 ] // can't access Column3 anymore!
+       [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column4 ] // can't access Column3 anymore!
     
 
 
