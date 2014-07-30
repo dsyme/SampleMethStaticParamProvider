@@ -87,7 +87,7 @@ A regex type provider that lets you do this:
        RegEx.IsMatch<"a+b*c?">(data)
 
 
-#### A Strongly Typed Deata Frame Library
+#### A Strongly Typed Data Frame Library
 
 A more strongly typed data frame library that lets you add/remove columns in a strongly typed functional way, like the CSV example.
 
