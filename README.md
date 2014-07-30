@@ -55,7 +55,6 @@ We don't use additions to the ITypeProvider interface in the protoype to avoid b
 
 1. A modified CSV type provider that lets you do add a column. The return type would be a _new_ object representing the data collection with the column added.  This is a bit like a "reccord calculus" where you can add and remove columns in user code in strongly typed ways (but can't write code that is generic over column types)
 
-``
        // assume csvData has some type 
        type MyCsvFile = FSharp.Data.CsvProvider<"mycsv.csv">
     
@@ -75,7 +74,6 @@ We don't use additions to the ITypeProvider interface in the protoype to avoid b
        let newCsvData3 = newCsvData.RemoveColumn<"Column3", "int">()  
 
        [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column4 ] // can't access Column3 anymore!
-``
 
 2. A regex type provider that lets you do this:
 
