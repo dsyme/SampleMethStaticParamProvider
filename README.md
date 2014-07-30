@@ -53,30 +53,32 @@ We don't use additions to the ITypeProvider interface in the protoype to avoid b
 ## Example things we might now build:
 
 
-1. A modified CSV type provider that lets you do add a column. The return type would be a _new_ object representing the data collection with the column added.  This is a bit like a "reccord calculus" where you can add and remove columns in user code in strongly typed ways (but can't write code that is generic over column types)
+#### CSV data manipulation where you can add/remove columns within a data script
+
+A modified CSV type provider that lets you do add a column. The return type would be a _new_ object representing the data collection with the column added.  This is a bit like a "reccord calculus" where you can add and remove columns in user code in strongly typed ways (but can't write code that is generic over column types)
 
 
-       // assume csvData has some type 
+    type MyCsvFile = FSharp.Data.CsvProvider<"mycsv.csv">
+    
+    let csvData = MyCsvFile.LoadSample() // ....
        
-       type MyCsvFile = FSharp.Data.CsvProvider<"mycsv.csv">
+    [ for row in csvData -> row.Column1, row.Column2 ]
        
-       let csvData = MyCsvFile.LoadSample() // ....
+    let newCsvData = csvData.WithColumn<"Column3", "int">()  
        
-       [ for row in csvData -> row.Column1, row.Column2 ]
+    [ for row in newCsvData -> row.Column1, row.Column2, row.Column3 ]
        
-       let newCsvData = csvData.WithColumn<"Column3", "int">()  
+    let newCsvData2 = newCsvData.WithColumn<"Column4", "int">()  
        
-       [ for row in newCsvData -> row.Column1, row.Column2, row.Column3 ]
+    [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column3, row.Column4 ]
        
-       let newCsvData2 = newCsvData.WithColumn<"Column4", "int">()  
+    let newCsvData3 = newCsvData.RemoveColumn<"Column3", "int">()  
        
-       [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column3, row.Column4 ]
-       
-       let newCsvData3 = newCsvData.RemoveColumn<"Column3", "int">()  
-       
-       [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column4 ] // can't access Column3 anymore!
+    [ for row in newCsvData2 -> row.Column1, row.Column2, row.Column4 ] // can't access Column3 anymore!
 
-2. A regex type provider that lets you do this:
+#### Embedding Regular Expression more Fluently
+
+A regex type provider that lets you do this:
 
        RegEx.Parse<"a+b*c?">(data)
        
@@ -85,16 +87,20 @@ We don't use additions to the ITypeProvider interface in the protoype to avoid b
        RegEx.IsMatch<"a+b*c?">(data)
 
 
-2. A more strongly typed data frame library that lets you add/remove columns in a strongly typed functional way, like the CSV example.
+#### A Strongly Typed Deata Frame Library
 
-3. A modified SqlClient type provider that takes the SQL command? - see [the original proposal](http://fslang.uservoice.com/forums/245727-f-language/suggestions/6097685-allow-static-arguments-to-type-provider-methods-e)
+A more strongly typed data frame library that lets you add/remove columns in a strongly typed functional way, like the CSV example.
+
+#### Create/delete SQL tables in a strongly-typed, code-first way
+
+A modified SqlClient type provider that takes the SQL command? - see [the original proposal](http://fslang.uservoice.com/forums/245727-f-language/suggestions/6097685-allow-static-arguments-to-type-provider-methods-e)
 
 
-      type SqlConnect = SomeSQlProvider<"Some ConnectionString">
+    type SqlConnect = SomeSQlProvider<"Some ConnectionString">
 
-      let ctxt = SqlConnect.GetDataContext()
+    let ctxt = SqlConnect.GetDataContext()
     
-      let sqlTable = ctxt.CreateTable<"CREATE TABLE Foo COLUMNS X, Y">()  
+    let sqlTable = ctxt.CreateTable<"CREATE TABLE Foo COLUMNS X, Y">()  
 
 
 4. A search functionality in the DbPedia provider which reveals individual entities:
