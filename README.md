@@ -1,4 +1,24 @@
-# Sample of a type provider where methods have static parameters (demo of an F# 4.0+ feature)
+# Extending the F# type provider mechanism to allow methods to have static parameters (uses a prototype of an F# 4.0+ feature)
+
+Integrating data, metadata (schema) and programming is a fundamental problem at the heart of much applied data programming and code-oriented data science.
+
+F# has an immensely powerful mechanism called F# type providers which allows for the scalable integration of data and schema.
+
+In this project we designed and prototyped a powerful fundamental extension to the F# type provider programming model that has particular uses when programs adjust or specify new schema during the course of execution.  This extension had been proposed initially by the F# community through our open consultation process.
+
+For example, you might want 
+
+- CSV data manipulation where you can add/remove columns within a data script
+
+- Embedding Regular Expression more Fluently in a programming language
+- A Strongly Typed Data Frame Library
+
+- Create/delete SQL tables in a strongly-typed, code-first way
+
+- A search functionality in a massive Satori, Freebase or DbPedia knowledge graph (integrated into the programming language) which reveals individual entities
+
+The feature implemented here will help enable these scenarios.
+
 
 This is a Hackathon project to add the F# language feature described here: http://fslang.uservoice.com/forums/245727-f-language/suggestions/6097685-allow-static-arguments-to-type-provider-methods-e.
 
