@@ -1,4 +1,11 @@
-# Extending the F# type provider mechanism to allow methods to have static parameters (uses a prototype of an F# 4.0+ feature)
+# Archived: Extending the F# type provider mechanism to allow methods to have static parameters (uses a prototype of an F# 4.0+ feature)
+
+----
+
+See [the feature specification](https://github.com/fsharp/FSharpLangDesign/blob/master/FSharp-4.0/StaticMethodArgumentsDesignAndSpec.md) for latest details on this F# 4.0 feature.
+
+----
+
 
 Integrating data, metadata (schema) and programming is a fundamental problem at the heart of much applied data programming and code-oriented data science.
 
